@@ -6,12 +6,7 @@ set "URL=https://raw.githubusercontent.com/DevilGlitch/ezMMCC/main/ezMMCC.py"
 
 REM Install required Python packages
 echo Installing required Python packages...
-pip install psutil tkinter >nul 2>&1
-if %errorlevel% neq 0 (
-    echo Failed to install required packages. Please check your pip installation.
-    pause
-    exit /b
-)
+pip install psutil tkinter
 
 REM Check if ezMMCC.py exists
 if not exist "ezMMCC.py" (
