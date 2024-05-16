@@ -8,14 +8,21 @@ REM Check for Python installation
 echo Checking for Python installation...
 python --version >nul 2>&1
 if %errorlevel% neq 0 (
-    echo Python is not installed. Please install Python before running this script.
-    pause
-    exit /b
+    py --version >nul 2>&1
+    if %errorlevel% neq 0 (
+        echo Python is not installed or not found in PATH. Please install Python and ensure it is added to the PATH.
+        pause
+        exit /b
+    ) else (
+        set "PYTHON_CMD=py"
+    )
+) else (
+    set "PYTHON_CMD=python"
 )
 
 REM Install required Python packages
 echo Installing required Python packages...
-pip install psutil tkinter
+%PYTHON_CMD% -m pip install psutil tkinter >nul 2>&1
 if %errorlevel% neq 0 (
     echo Failed to install required packages. Please check your Python and pip installation.
     pause
@@ -35,7 +42,7 @@ if not exist "ezMMCC.py" (
 
 REM Run ezMMCC.py
 echo Running ezMMCC.py...
-python ezMMCC.py
+%PYTHON_CMD% ezMMCC.py
 if %errorlevel% neq 0 (
     echo Failed to run ezMMCC.py. Please check the script for errors.
     pause
