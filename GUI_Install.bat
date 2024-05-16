@@ -15,7 +15,7 @@ if %errorlevel% neq 0 (
 
 REM Install required Python packages
 echo Installing required Python packages...
-pip install psutil tkinter >nul 2>&1
+pip install psutil tkinter
 if %errorlevel% neq 0 (
     echo Failed to install required packages. Please check your Python and pip installation.
     pause
